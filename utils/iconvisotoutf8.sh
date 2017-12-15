@@ -1,4 +1,4 @@
-for File in `ls *.txt`; do
-	Filename=`basename $File .txt`
-	iconv -f iso-8859-15 -t utf-8 $File > $Filename.utf8.txt
+for file in `ls *.txt`; do
+	filename=`basename $file .txt`
+	iconv -f iso-8859-15 -t utf-8 $file > $filename.utf8.txt
 done

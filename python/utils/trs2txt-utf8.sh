@@ -1,4 +1,4 @@
-# give folder in parameter (e.g. '../release1/trans-man/dev'
+# give folder in parameter (e.g. '../../release1/trans-man/dev'
 
 for file in `ls $1/*.trs`; do
 	filename=`basename $file .trs`

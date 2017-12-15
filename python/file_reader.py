@@ -26,6 +26,7 @@ class FileReader:
             # print(infos[0])
             # print(text)
 
+            # TODO separate class that returns a dict with <ID: LABEL>
             # get classes
             for elem in labels:
                 parts = elem.split('_')

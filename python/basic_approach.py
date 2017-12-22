@@ -5,10 +5,8 @@ from sklearn.feature_extraction.text import CountVectorizer
 
 DATA_DIR = "../release1/trans-manu"
 
-dev_corpus = pd.read_csv(DATA_DIR + "dev.csv", sep='\t',
-                         skiprows=10, header=None, names=['id', 'content', 'label'], quoting=3)
-train_corpus = pd.read_csv(DATA_DIR + "train.csv", sep='\t',
-                           skiprows=10, header=None, names=['id', 'content', 'label'], quoting=3)
+dev_corpus = pd.read_csv(DATA_DIR + "dev.csv", sep='\t', header=None, names=['id', 'content', 'label'], quoting=3)
+train_corpus = pd.read_csv(DATA_DIR + "train.csv", sep='\t', header=None, names=['id', 'content', 'label'], quoting=3)
 
 
 train_content = list(train_corpus['content'])

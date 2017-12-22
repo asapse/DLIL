@@ -5,7 +5,7 @@ import file_reader as fr
 class TestLabels(unittest.TestCase):
 
     def setUp(self):
-        self.labels = fr.Labels()
+        self.labels = fr.Labels('dev')
 
     def test_init(self):
         self.assertEqual(298, len(self.labels.dict_labels))
@@ -16,5 +16,9 @@ class TestLabels(unittest.TestCase):
 
 class TestFileReader(unittest.TestCase):
 
+    def test_read_file_when_folder_txt_not_exist_expect_exception(self):
+        with self.assertRaises(Exception):
+            fr.FileReader('trans-manu/test').read_files()
+
     def test_read_file(self):
-        fr.FileReader().read_files()
+        fr.FileReader('trans-manu/train').read_files()

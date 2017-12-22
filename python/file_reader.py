@@ -4,8 +4,8 @@ import settings
 
 class Labels:
 
-    def __init__(self):
-        labels = open(settings.DEV_LABELS, 'r').read().split('\n')
+    def __init__(self, file_name):
+        labels = open(settings.LABELS_DIR+file_name+'.2015.lst', 'r').read().split('\n')
         dict_labels = dict()
         for elem in labels:
             parts = elem.split('_')
@@ -28,23 +28,28 @@ class FileReader:
 
     EXCLUDED = ['excluded_region', 'inter_segment_gap']
 
+    def __init__(self, file_name):
+        self.file_name = file_name
+
     def read_files(self):
         """
         Creates of csv file with 3 columns (ID, TEXT, LABEL), each line represents an audio transcription.
         """
-        with open(settings.TRANS_MAN + '/dev.csv', 'w') as output_file:
+        if os.path.exists(settings.DATA_DIR + self.file_name + '/txt'):
+            with open(settings.DATA_DIR + self.file_name + '.csv', 'w') as output_file:
+                labels = Labels(self.file_name.split('/')[1])
+                for file in os.listdir(settings.DATA_DIR + self.file_name + '/txt'):
+                    file_path = os.path.join(settings.DATA_DIR + self.file_name + '/txt', file)
+                    # print(file_path)
+                    file_content = open(file_path).read()
+                    text = ''
+                    for line in file_content.split('\n'):
+                        if not line.startswith(";;") and line:
+                            parts = line.split('>')
+                            infos = parts[0].split()
+                            if len(infos) > 2 and infos[2] not in self.EXCLUDED:
+                                text += parts[1]
 
-            labels = Labels()
-            for file in os.listdir(settings.TRANS_MAN_DEV_TXT):
-                file_path = os.path.join(settings.TRANS_MAN_DEV_TXT, file)
-                # print(file_path)
-                file_content = open(file_path).read()
-                text = ''
-                for line in file_content.split('\n'):
-                    if not line.startswith(";;") and line:
-                        parts = line.split('>')
-                        infos = parts[0].split()
-                        if len(infos) > 2 and infos[2] not in self.EXCLUDED:
-                            text += parts[1]
-
-                output_file.write('{}\t{}\t{}\n'.format(infos[0], text, labels.get_label(infos[0])))
+                    output_file.write('{}\t{}\t{}\n'.format(infos[0], text, labels.get_label(infos[0])))
+        else:
+            raise Exception('Folder '+settings.DATA_DIR + self.file_name + '/txt doesn\'t exist.')

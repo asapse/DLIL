@@ -1,5 +1,9 @@
+# Project structure :
+DLIL - python (python files)
+     - release1 (data)
+
 # generate txt files from trs
 
-Dans python/utils :
+# Dans python/utils :
 sh trs2txt-utf8.sh trans-man/train
 sh trs2txt-utf8.sh trans-man/dev

@@ -24,14 +24,14 @@ class Labels:
         return self.dict_labels[id]
 
 
-class FileReader:
+class CSVGenerator:
 
     EXCLUDED = ['excluded_region', 'inter_segment_gap']
 
     def __init__(self, file_name):
         self.file_name = file_name
 
-    def read_files(self):
+    def generate(self):
         """
         Creates of csv file with 3 columns (ID, TEXT, LABEL), each line represents an audio transcription.
         """

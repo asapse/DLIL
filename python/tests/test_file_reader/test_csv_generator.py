@@ -1,11 +1,11 @@
 import unittest
-import file_reader as fr
+import csv_generator as gen
 
 
 class TestLabels(unittest.TestCase):
 
     def setUp(self):
-        self.labels = fr.Labels('dev')
+        self.labels = gen.Labels('dev')
 
     def test_init(self):
         self.assertEqual(298, len(self.labels.dict_labels))
@@ -18,7 +18,7 @@ class TestFileReader(unittest.TestCase):
 
     def test_read_file_when_folder_txt_not_exist_expect_exception(self):
         with self.assertRaises(Exception):
-            fr.FileReader('trans-manu/test').read_files()
+            gen.CSVGenerator('trans-manu/test').generate()
 
     def test_read_file(self):
-        fr.FileReader('trans-manu/train').read_files()
+        gen.CSVGenerator('trans-manu/train').generate()

@@ -1,0 +1,5 @@
+# generate txt files from trs
+
+Dans python/utils :
+sh trs2txt-utf8.sh trans-man/train
+sh trs2txt-utf8.sh trans-man/dev

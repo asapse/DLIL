@@ -1,5 +1,6 @@
 
 release1/
 /.vs
+python/__pycache__
 
 .idea/

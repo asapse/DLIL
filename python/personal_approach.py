@@ -1,19 +1,22 @@
-import spacy
 import pandas as pd
+import numpy as np
+import itertools
+import warnings
+import matplotlib.pyplot as plt
 
 from sklearn.naive_bayes import MultinomialNB
 from sklearn import svm
-from sklearn.feature_extraction.text import CountVectorizer
-import matplotlib.pyplot as plt
+from sklearn.linear_model import LogisticRegression, SGDClassifier
+from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer, TfidfTransformer
 from sklearn.metrics import confusion_matrix
-import numpy as np
-import itertools
-from sklearn.model_selection import cross_validate
-
-import warnings
 from sklearn import metrics
-from sklearn.feature_selection import SelectKBest, chi2
+from sklearn.ensemble import VotingClassifier
 
+from nltk.corpus import stopwords
+"""
+from nltk.tokenize.moses import MosesTokenizer
+moses = MosesTokenizer(lang='fr')
+"""
 
 def warn(*args, **kwargs):
     pass
@@ -25,8 +28,8 @@ def plot_confusion_matrix(cm, classes, title='Confusion matrix'):
     This function prints and plots the confusion matrix.
     Normalization can be applied by setting `normalize=True`.
     """
-    print('Confusion matrix')
-    print(cm)
+    # print('Confusion matrix')
+    # print(cm)
 
     plt.imshow(cm, interpolation='nearest', cmap=plt.cm.Blues)
     plt.title(title)
@@ -61,39 +64,33 @@ train_label = list(train_corpus['label'])
 dev_content = list(dev_corpus['content'])
 dev_label = list(dev_corpus['label'])
 
-vectorizer = CountVectorizer()
+stop_words = set(stopwords.words('french'))
+vectorizer = TfidfVectorizer(stop_words=stop_words, strip_accents='unicode', ngram_range=(1, 3))
+
 X_train = vectorizer.fit_transform(train_content)
 X_dev = vectorizer.transform(dev_content)
 
 y_train = train_label
 y_dev = dev_label
-"""
-ch2 = SelectKBest(chi2)
-X_train = ch2.fit_transform(X_train, y_train)
-X_dev = ch2.transform(X_dev)
-"""
+
 class_names = list(set(train_label))
 
-scoring = ['f1_micro', 'f1_macro', 'precision_macro', 'recall_macro', 'precision_micro']
+clf1 = MultinomialNB(alpha=0.1)
+clf2 = svm.LinearSVC(C=1.5, penalty="l1", dual=False)
+clf3 = SGDClassifier()
 
-# classifier = MultinomialNB(alpha=.01)  # alpha = .01 ?
-classifier = svm.LinearSVC(C=0.01, penalty="l1", dual=False)
+classifier = VotingClassifier(estimators=[('mnb', clf1), ('lsvc', clf2), ('lr', clf3)])
+
 classifier.fit(X_train, y_train)
 y_pred = classifier.predict(X_dev)
 
-# print(classifier.score(X_dev, y_dev))
 print("Recall UA:", metrics.recall_score(y_dev, y_pred, labels=class_names, average='macro'))
 print("Recall WA:", metrics.recall_score(y_dev, y_pred, labels=class_names, average='weighted'))
 print("Precision UA:", metrics.precision_score(y_dev, y_pred, labels=class_names, average='macro'))
 print("Precision WA:", metrics.precision_score(y_dev, y_pred, labels=class_names, average='weighted'))
 
 print("==============")
-clf_metrics = metrics.precision_recall_fscore_support(y_dev, y_pred, labels=class_names)
-print("Precision: ", clf_metrics[0])
-print("Recall: ", clf_metrics[1])
-print("F-score: ", clf_metrics[2])
-print("Support:", clf_metrics[3])
-print(class_names)
+print(metrics.classification_report(y_dev, y_pred, target_names=class_names))
 
 # Compute confusion matrix
 cnf_matrix = confusion_matrix(y_dev, y_pred, labels=class_names)

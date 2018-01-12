@@ -26,6 +26,7 @@ def main(argv):
 	if argv[1]=="manu":
 		train_corpus = csv_exist(argv[1], "train")
 		dev_corpus = csv_exist(argv[1], "dev")
-
+	if argv[1]=="auto":
+		pass
 if __name__ == "__main__":
    	 main(sys.argv)

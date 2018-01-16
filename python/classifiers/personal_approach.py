@@ -52,7 +52,7 @@ def plot_confusion_matrix(cm, classes, title='Confusion matrix'):
     plt.xlabel('Predicted label')
 
 
-DATA_DIR = "../../release1/trans-manu/"
+DATA_DIR = "../release1/trans-manu/"
 # DATA_DIR = "../../release2/"
 
 dev_corpus = pd.read_csv(DATA_DIR + "dev.csv", sep='\t', header=None,
@@ -78,22 +78,21 @@ y_dev = dev_label
 
 class_names = list(set(train_label))
 
-clf1 = MultinomialNB(alpha=0.1)
-clf2 = svm.LinearSVC(C=1.5, penalty="l1", dual=False)
-clf3 = SGDClassifier()
+# clf1 = MultinomialNB(alpha=0.1)
+# clf2 = svm.LinearSVC(C=1.5, penalty="l1", dual=False)
+classifier = SGDClassifier()
 
-classifier = VotingClassifier(estimators=[('mnb', clf1), ('lsvc', clf2), ('lr', clf3)])
+# classifier = VotingClassifier(estimators=[('mnb', clf1), ('lsvc', clf2), ('lr', clf3)])
 
 classifier.fit(X_train, y_train)
 y_pred = classifier.predict(X_dev)
 
-print("Recall UA:", metrics.recall_score(y_dev, y_pred, labels=class_names, average='macro'))
-print("Recall WA:", metrics.recall_score(y_dev, y_pred, labels=class_names, average='weighted'))
-print("Precision UA:", metrics.precision_score(y_dev, y_pred, labels=class_names, average='macro'))
-print("Precision WA:", metrics.precision_score(y_dev, y_pred, labels=class_names, average='weighted'))
+print("Macro Precision:", metrics.precision_score(y_dev, y_pred, average='macro'))
+print("Macro Recall:", metrics.recall_score(y_dev, y_pred, average='macro'))
+print("Micro Pr/Re:", metrics.precision_score(y_dev, y_pred, average='micro'))
 
 print("==============")
-print(metrics.classification_report(y_dev, y_pred, target_names=class_names))
+print(metrics.classification_report(y_dev, y_pred))  # labels=class_names
 
 # Compute confusion matrix
 cnf_matrix = confusion_matrix(y_dev, y_pred, labels=class_names)

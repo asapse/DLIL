@@ -25,6 +25,9 @@ class Labels:
 
 
 class CSVGenerator:
+    """
+    Used to generate CSV files from release1/trans-manu data
+    """
 
     EXCLUDED = ['excluded_region', 'inter_segment_gap']
 

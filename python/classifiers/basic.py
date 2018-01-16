@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 from sklearn.metrics import confusion_matrix, f1_score, recall_score, precision_score
 from sklearn.model_selection import cross_validate
 
+
 class BasicClf:
 
     def __init__(self, corpus_train):

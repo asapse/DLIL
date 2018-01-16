@@ -1,10 +1,11 @@
-import sys
 import os
+import sys
 from pathlib import Path
+
 import pandas as pd
-from csv_generator import CSVGenerator
-from sklearn.naive_bayes import MultinomialNB
+
 from classifiers.basic import BasicClf
+from utils.csv_generator import CSVGenerator
 
 
 def csv_exist(trans, file):

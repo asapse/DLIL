@@ -12,11 +12,13 @@ from sklearn.metrics import confusion_matrix
 from sklearn import metrics
 from sklearn.ensemble import VotingClassifier
 
+from spacy.lang.fr.stop_words import STOP_WORDS
+from spacy.lang.fr import French
+import spacy
+import os
+
 from nltk.corpus import stopwords
-"""
-from nltk.tokenize.moses import MosesTokenizer
-moses = MosesTokenizer(lang='fr')
-"""
+
 
 def warn(*args, **kwargs):
     pass
@@ -50,7 +52,8 @@ def plot_confusion_matrix(cm, classes, title='Confusion matrix'):
     plt.xlabel('Predicted label')
 
 
-DATA_DIR = "../release1/trans-manu/"
+DATA_DIR = "../../release1/trans-manu/"
+# DATA_DIR = "../../release2/"
 
 dev_corpus = pd.read_csv(DATA_DIR + "dev.csv", sep='\t', header=None,
                          names=['id', 'content', 'label'], quoting=3, keep_default_na=False)

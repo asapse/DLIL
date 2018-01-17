@@ -51,17 +51,19 @@ def main(argv):
     if argv[1] == "manu":
         train_corpus = csv_exist(argv[1], "train")
         dev_corpus = csv_exist(argv[1], "dev")
+        test_corpus = csv_exist(argv[1], "test")
     if argv[1] == "auto":
         train_corpus = csv_exist(argv[1], "train")
         dev_corpus = csv_exist(argv[1], "dev")
+        test_corpus = csv_exist(argv[1], "test")
 
     basic = BasicClf(train_corpus)
     print("Baseline:")
-    basic.evaluate(dev_corpus)
+    basic.evaluate(test_corpus)
 
     perso = PersonalClf(train_corpus)
     print("Perso:")
-    perso.evaluate(dev_corpus)
+    perso.evaluate(test_corpus)
 
 
 if __name__ == "__main__":

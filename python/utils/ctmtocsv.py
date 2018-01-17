@@ -57,12 +57,13 @@ data_path = "../../release2/trans-auto/trans-asr-decoda.ctm"
 if Path(data_path).exists():
 	label_dev = label_dict("../../release1/labels/dev.2015.lst")
 	label_train = label_dict("../../release1/labels/train.2015.lst")
+	label_test = label_dict("../../release1/labels/test.2015.lst")
 	
 	dic_dev, dic_train, dic_test = data_dict(data_path)
 
 	dev = pd.DataFrame(data=dict_to_list(dic_dev, label_dev))
 	train = pd.DataFrame(data=dict_to_list(dic_train, label_train))
-	test = pd.DataFrame(data=dict_to_list(dic_test))
+	test = pd.DataFrame(data=dict_to_list(dic_test, label_test))
 
 	dev.to_csv("../../release2/dev.csv", sep="\t",header=False, index=False)
 	train.to_csv("../../release2/train.csv", sep="\t",header=False, index=False)

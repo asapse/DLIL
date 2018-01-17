@@ -9,9 +9,9 @@ class PersonalClf:
     def __init__(self, corpus_train):
         self.clf = SGDClassifier()
         stop_words = set(stopwords.words('french'))
-        self.vectorizer = TfidfVectorizer(stop_words=stop_words, strip_accents='unicode', ngram_range=(1, 3))
-        self.X_train = self.extract_features(pd.DataFrame(corpus_train)['content'], fit=True)
+        self.vectorizer = TfidfVectorizer(stop_words=stop_words, strip_accents='unicode', ngram_range=(1, 2))
         self.y_train = pd.DataFrame(corpus_train)['label']
+        self.X_train = self.extract_features(pd.DataFrame(corpus_train)['content'], fit=True)
         self.train()
 
     def extract_features(self, X, fit=False):
@@ -36,7 +36,7 @@ class PersonalClf:
         print("Micro Pr/Re:", metrics.precision_score(y_dev, y_pred, labels=class_names, average='micro'))
 
         print("==============")
-        print(metrics.classification_report(y_dev, y_pred))
+        print(metrics.classification_report(y_dev, y_pred, labels=class_names))
 
     def predict(self):
         pass

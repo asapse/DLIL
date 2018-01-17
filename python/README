@@ -1,9 +1,6 @@
 # Project structure :
 DLIL - python (python files)
-     - release1 (data)
+     - release1 (data manu)
+     - release2 (data auto)
 
-# generate txt files from trs
-
-# Dans python/utils :
-sh trs2txt-utf8.sh trans-man/train
-sh trs2txt-utf8.sh trans-man/dev
+# Execute the main

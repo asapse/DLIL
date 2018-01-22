@@ -1,5 +1,13 @@
-baseline_run1 & man & 0.831775700935 & 0.631058022718 & 0.831775700935 & 0.563316835413
-perso_run1 & man & 0.826086956522 & 0.552092851418 & 0.826086956522 & 0.532664109434
+% La run1 correspond à notre baseline, apprentissage sur le corpus de train, puis évaluation sur le test.
+% La run2 correspond à notre approche personnelle exécutée de la même façon.
+% Les run 3 et 4 correspondent aux approches précédentes, mais avec l'apprentissage fait sur le corpus de train+dev et l'évaluation sur le test.
 
-baseline_run1 & auto & 0.82298136646 & 0.619976539726 & 0.82298136646 & 0.556717778088
-perso_run1 & auto & 0.832298136646 & 0.595806672592 & 0.832298136646 & 0.566435983859
+BONESPKER_run1 & man & 0.831775700935 & 0.631058022718 & 0.831775700935 & 0.563316835413 \\
+BONESPKER_run2 & man & 0.844720496894 & 0.6437390081 & 0.844720496894 & 0.584187147799 \\
+BONESPKER_run3 & man & 0.82298136646 & 0.619108033605 & 0.82298136646 & 0.568215244123 \\
+BONESPKER_run4 & man & 0.847826086957 & 0.647822937059 & 0.847826086957 & 0.594857224848 \\
+
+BONESPKER_run1 & auto & 0.82298136646 & 0.619976539726 & 0.82298136646 & 0.556717778088 \\
+BONESPKER_run2 & auto & 0.834890965732 & 0.556563862338 & 0.834890965732 & 0.554483855527 \\
+BONESPKER_run3 & auto & 0.816770186335 & 0.622736101614 & 0.816770186335 & 0.562356875832 \\
+BONESPKER_run4 & auto & 0.83850931677 & 0.561834308404 & 0.83850931677 & 0.56499006136 \\

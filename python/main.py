@@ -35,7 +35,7 @@ def csv_exist(trans, file):
             return pd.read_csv(path, sep='\t', header=None, names=['id', 'content', 'label'], quoting=3,
                                keep_default_na=False)
         else:
-            # gen files
+            # generate files using ctmtocsv.py
             pass
 
 

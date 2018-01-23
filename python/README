@@ -1,0 +1,10 @@
+# Project structure :
+DLIL > python > main.py
+              > classifiers > basic.py
+                            > personal.py
+              > utils (scripts used to generate csv files)
+     > release1 (data manu)
+     > release2 (data auto)
+
+# To see the results, just execute the main.py program.
+# python3 main.py [manu|auto]

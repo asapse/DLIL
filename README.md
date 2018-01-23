@@ -18,7 +18,7 @@ Cinq étapes importantes :
 1. Prise en main du corpus de transcriptions manuelles, mise en oeuvre d'une approche de base, évaluation sur le corpus de dev
 2. Développement d'une approche personnelle, évaluation sur le corpus de dev
 3. Prise en main du corpus de transcriptions automatiques, évaluation de l'approche personnelle, analyse quantitive/qualitative
-4. Adaptation de l'approche personnelle sur les transcriptions manuelles
+4. Adaptation de l'approche personnelle sur les transcriptions automatique
 5. Evaluation sur le corpus de test des deux approches
 
 Dates importantes

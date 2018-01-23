@@ -13,8 +13,8 @@ def add_dict_value(dic, filename, word):
 def label_dict(path):
 	file = open(path, 'r')
 	label_dic = {}
-	for line in file:
-		label_dic[line[:22]] = line.split("_")[4][:-2]
+	for line in file.readlines():
+		label_dic[line[:22]] = line.split("_")[4].strip()
 	return label_dic
 
 def data_dict(path):

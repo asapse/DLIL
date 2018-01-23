@@ -60,20 +60,20 @@ def main(argv):
     print("Run 1")
     basic = BasicClf(train_corpus)
     print("Baseline:")
-    basic.evaluate(test_corpus)
+    basic.evaluate(test_corpus, full=True)
 
     perso = PersonalClf(train_corpus)
     print("Perso:")
-    perso.evaluate(test_corpus)
+    perso.evaluate(test_corpus, full=True)
 
     print("Run 2")
     basic = BasicClf(train_corpus, corpus_add=dev_corpus)
     print("Baseline:")
-    basic.evaluate(test_corpus)
+    basic.evaluate(test_corpus, full=True)
 
     perso = PersonalClf(train_corpus, corpus_add=dev_corpus)
     print("Perso:")
-    perso.evaluate(test_corpus)
+    perso.evaluate(test_corpus, full=True)
 
 
 if __name__ == "__main__":
